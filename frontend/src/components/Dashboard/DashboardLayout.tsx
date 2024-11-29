@@ -1,8 +1,9 @@
 import React from 'react';
 import { Box, Container, Grid } from '@mui/material';
-import NetworkStats from '../Analytics/NetworkStats';
+
+import NetworkStats from '../NetworkStats/NetworkStats';
 import MinersList from '../Miners/MinersList';
-import ProfitabilityChart from '../Charts/ProfitabilityChart';
+import ProfitabilityChart from '../Analytics/ProfitabilityChart';
 import ROICalculator from '../Analytics/ROICalculator';
 
 const DashboardLayout = () => {
