@@ -1,33 +1,25 @@
-import { Card, CardContent, Typography, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getMiners } from '../../services/api';
+import { Card, CardContent, Typography, List, ListItem } from '@mui/material';
+import { api } from '../../services/api';
 
-export const MinersList = () => {
-  const { data } = useQuery(['miners'], getMiners);
+const MinersList = () => {
+  const { data: miners } = useQuery(['miners'], api.getMiners);
 
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" gutterBottom>Active Miners</Typography>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Hashrate</TableCell>
-              <TableCell>Status</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data?.map((miner) => (
-              <TableRow key={miner.id}>
-                <TableCell>{miner.name}</TableCell>
-                <TableCell>{miner.hashrate}</TableCell>
-                <TableCell>{miner.status}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <Typography variant="h6">Available Miners</Typography>
+        <List>
+          {miners?.data.map((miner: any) => (
+            <ListItem key={miner.id}>
+              <Typography>{miner.name}</Typography>
+            </ListItem>
+          ))}
+        </List>
       </CardContent>
     </Card>
   );
 };
+
+export default MinersList;
