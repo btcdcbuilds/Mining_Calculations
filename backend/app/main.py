@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .api.v1 import (
     miners, historical_data, roi, comparison, profitability,
     analytics.network, analytics.depreciation, analytics.portfolio,
-    analytics.cost_basis, analytics.market
+    analytics.cost_basis, analytics.market, data_management
 )
 from .database.database import engine, Base
 
@@ -32,6 +32,7 @@ app.include_router(analytics.depreciation.router, prefix="/api/v1")
 app.include_router(analytics.portfolio.router, prefix="/api/v1")
 app.include_router(analytics.cost_basis.router, prefix="/api/v1")
 app.include_router(analytics.market.router, prefix="/api/v1")
+app.include_router(data_management.router, prefix="/api/v1/data")
 
 @app.get("/")
 async def root():
