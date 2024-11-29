@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .api.v1 import miners, historical_data
+from .api.v1 import miners, historical_data, roi, comparison, profitability
 from .database.database import engine, Base
 
 # Create database tables
@@ -20,6 +20,9 @@ app.add_middleware(
 # Include routers
 app.include_router(miners.router, prefix="/api/v1")
 app.include_router(historical_data.router, prefix="/api/v1")
+app.include_router(roi.router, prefix="/api/v1")
+app.include_router(comparison.router, prefix="/api/v1")
+app.include_router(profitability.router, prefix="/api/v1")
 
 @app.get("/")
 async def root():
