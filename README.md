@@ -42,54 +42,40 @@ A comprehensive FastAPI-based analytics tool for Bitcoin mining operations, prov
    - Cost basis tracking (`/api/v1/cost-basis/{miner_id}`)
    - Market analysis (`/api/v1/market/analysis`)
 
-#### Calculation Utilities
-- Daily revenue calculations
-- Power cost calculations
-- Efficiency metrics
-- BTC mining rate estimation
-- ROI period calculations
-- Depreciation calculations
+#### Frontend Development
+- React dashboard setup
+- Material-UI theme implementation
+- API integration services
+- Core components:
+  - Dashboard layout
+  - Network statistics
+  - Miner management interface
+  - ROI calculator
+  - Profitability charts
+  - Market analysis views
 
-### 🚧 In Progress
+#### Data Management
+- Data import scripts
+- Data validation
+- Export functionality
+- Automated updates
 
-1. **Data Population**
-   - Historical data import functionality
-   - Miner catalog population
-   - Test data generation
+### 📋 Remaining Tasks
 
-2. **Testing**
-   - Unit tests for calculation utilities
-   - API endpoint testing
-   - Integration tests
-
-### 📋 Next Steps
-
-1. **Data Management**
-   - [ ] Create data import scripts
-   - [ ] Implement data validation
-   - [ ] Add data export functionality
-   - [ ] Setup automated data updates
-
-2. **Frontend Development**
-   - [ ] Create React dashboard
-   - [ ] Implement interactive charts
-   - [ ] Add real-time updates
-   - [ ] Design responsive UI
-
-3. **Advanced Features**
+1. **Advanced Features**
    - [ ] Machine learning price predictions
    - [ ] Advanced portfolio optimization
    - [ ] Energy efficiency analysis
    - [ ] Risk assessment system
    - [ ] Alert system for profitability thresholds
 
-4. **Documentation**
+2. **Documentation**
    - [ ] API documentation with Swagger UI
    - [ ] Installation guide
    - [ ] User manual
    - [ ] Development guide
 
-5. **Deployment**
+3. **Deployment**
    - [ ] Docker configuration
    - [ ] CI/CD pipeline
    - [ ] Production deployment guide
@@ -98,13 +84,35 @@ A comprehensive FastAPI-based analytics tool for Bitcoin mining operations, prov
 ## Setup Instructions
 
 ### Prerequisites
+- Python 3.8+
+- Node.js 14+
+- SQLite
 
 ### Installation
 1. Clone the repository
-2. Create virtual environment
-3. Install dependencies
-4. Initialize database
-5. Run the application
+2. Create virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Linux/Mac
+   # or
+   .\venv\Scripts\activate  # Windows
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   cd frontend && npm install
+   ```
+4. Initialize database:
+   ```bash
+   alembic upgrade head
+   ```
+5. Run the application:
+   ```bash
+   # Backend
+   uvicorn backend.app.main:app --reload
+   # Frontend
+   cd frontend && npm start
+   ```
 
 ### API Documentation
 Once running, access the API documentation at:
