@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Container, Grid } from '@mui/material';
+
 import NetworkStats from '../NetworkStats/NetworkStats';
 import MinersList from '../Miners/MinersList';
 import ProfitabilityChart from '../Analytics/ProfitabilityChart';
