@@ -1,23 +1,15 @@
-from pydantic import BaseModel
-from datetime import datetime
-from typing import Optional
+from sqlalchemy import Column, Integer, String, Float, Date
+from ..database.database import Base
 
-class MinerBase(BaseModel):
-    model: str
-    manufacturer: str
-    hashrate: float  # TH/s
-    power_consumption: float  # Watts
-    efficiency: float  # J/TH
-    release_date: datetime
-    price: Optional[float] = None
+class Miner(Base):
+    __tablename__ = "miners"
 
-class MinerCreate(MinerBase):
-    pass
-
-class Miner(MinerBase):
-    id: int
-    created_at: datetime
-    updated_at: datetime
-
-    class Config:
-        from_attributes = True
+    id = Column(Integer, primary_key=True, index=True)
+    model = Column(String, index=True)
+    manufacturer = Column(String)
+    hashrate = Column(Float)  # TH/s
+    power_consumption = Column(Float)  # Watts
+    efficiency = Column(Float)  # J/TH
+    release_date = Column(Date)
+    price = Column(Float)
+    status = Column(String)  # active/discontinued
