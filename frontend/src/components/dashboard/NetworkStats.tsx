@@ -1,26 +1,26 @@
-import { Card, CardContent, Typography, Grid } from '@mui/material';
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getNetworkStats } from '../../services/api';
+import { Card, CardContent, Typography, Grid } from '@mui/material';
+import { api } from '../../services/api';
 
-export const NetworkStats = () => {
-  const { data } = useQuery(['networkStats'], getNetworkStats);
+const NetworkStats = () => {
+  const { data: trends } = useQuery(['networkTrends'], api.getNetworkTrends);
 
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" gutterBottom>Network Statistics</Typography>
+        <Typography variant="h6">Network Statistics</Typography>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <Typography>Hashrate: {data?.hashrate}</Typography>
+          <Grid item xs={6}>
+            <Typography>Hash Rate: {trends?.data.hashrate}</Typography>
           </Grid>
-          <Grid item xs={4}>
-            <Typography>Difficulty: {data?.difficulty}</Typography>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography>Block Reward: {data?.block_reward} BTC</Typography>
+          <Grid item xs={6}>
+            <Typography>Difficulty: {trends?.data.difficulty}</Typography>
           </Grid>
         </Grid>
       </CardContent>
     </Card>
   );
 };
+
+export default NetworkStats;

@@ -1,11 +1,12 @@
+import React from 'react';
 import { Box, Container } from '@mui/material';
-import { Navbar } from './Navbar';
+import Navbar from './Navbar';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-export const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <Box>
       <Navbar />
@@ -15,3 +16,5 @@ export const Layout = ({ children }: LayoutProps) => {
     </Box>
   );
 };
+
+export default Layout;
