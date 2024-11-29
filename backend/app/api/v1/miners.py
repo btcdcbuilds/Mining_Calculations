@@ -1,23 +1,27 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from sqlalchemy.orm import Session
 from typing import List
-from ...models.miner import Miner, MinerCreate
+from ...models.miner import MinerModel, Miner, MinerCreate
+from ...database.database import get_db
+from datetime import datetime
 
 router = APIRouter()
 
-# Temporary storage (will be replaced with database later)
-miners_db = []
-
 @router.get("/miners/", response_model=List[Miner])
-async def get_miners():
-    return miners_db
+async def get_miners(db: Session = Depends(get_db)):
+    return db.query(MinerModel).all()
 
 @router.post("/miners/", response_model=Miner)
-async def create_miner(miner: MinerCreate):
-    new_miner = Miner(
-        id=len(miners_db) + 1,
-        **miner.dict(),
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow()
-    )
-    miners_db.append(new_miner)
-    return new_miner
+async def create_miner(miner: MinerCreate, db: Session = Depends(get_db)):
+    db_miner = MinerModel(**miner.dict())
+    db.add(db_miner)
+    db.commit()
+    db.refresh(db_miner)
+    return db_miner
+
+@router.get("/miners/{miner_id}", response_model=Miner)
+async def get_miner(miner_id: int, db: Session = Depends(get_db)):
+    miner = db.query(MinerModel).filter(MinerModel.id == miner_id).first()
+    if miner is None:
+        raise HTTPException(status_code=404, detail="Miner not found")
+    return miner
